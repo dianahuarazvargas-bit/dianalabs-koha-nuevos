@@ -1,6 +1,6 @@
-# _dianalabs_
+# 📘 Dianalabs Guía de Usuario: 
 
-# 📘 Guía de Usuario: Conversión de Google Sheets → MARC21 para Koha
+## Conversión de Google Sheets → MARC21 para Koha
 
 Esta guía explica cómo **transformar registros bibliográficos desde una hoja de cálculo** (Google Sheets) al formato **MARC21**, para poder importarlos masivamente al sistema **Koha**.
 
