@@ -1,9 +1,5 @@
 # dianalabs
 
-¡Perfecto! Aquí tienes tu guía de usuario reformateada para que se entienda de manera clara y visual, ideal para tu `README.md` en GitHub. He usado **encabezados, tablas, listas viñeteadas, recuadros de notas y código de ejemplo** para hacerla más amigable.
-
----
-
 # 📘 Guía de Usuario: Conversión de Google Sheets → MARC21 para Koha
 
 Esta guía explica cómo **transformar registros bibliográficos desde una hoja de cálculo** (Google Sheets) al formato **MARC21**, para poder importarlos masivamente al sistema **Koha**.
