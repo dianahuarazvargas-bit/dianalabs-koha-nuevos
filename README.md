@@ -6,6 +6,14 @@
 
 Esta guía explica cómo **transformar registros bibliográficos desde una hoja de cálculo** (Google Sheets) al formato **MARC21**, para poder importarlos masivamente al sistema **Koha**.
 
+## 📁 Archivos del repositorio
+
+| Archivo | Descripción |
+|---------|-------------|
+| [`GoogleSheets_a_Marc_Libros_Nuevos.ipynb`](./GoogleSheets_a_Marc_Libros_Nuevos.ipynb) | Notebook de Google Colab que ejecuta la conversión de Excel/Sheets a MARC21 |
+| [`Plantilla_Libros_Nuevos_GSheets.xlsx`](./Plantilla_Libros_Nuevos_GSheets.xlsx) | Plantilla de ejemplo con las columnas y encabezados esperados por el script |
+| `README.md` | Esta guía — instrucciones completas para usar el sistema |
+
 ---
 
 ## 🧭 1. Flujo general del proceso
