@@ -1,4 +1,4 @@
-[![DianaLabs - Nuevos](https://img.shields.io/badge/DianaLabs-Nuevos-8A2BE2?logo=github)](https://github.com/dianahuarazvargas-bit/dianalabs-koha-nuevos)
+[![DianaLabs - Koha Nuevos](https://img.shields.io/badge/DianaLabs-Koha_Nuevos-8A2BE2?logo=github)](https://github.com/dianahuarazvargas-bit/dianalabs-koha-nuevos)
 # 📘 Guía de Usuario: Conversión de Google Sheets a MARC21 para Koha
 
 ## Conversión de Google Sheets → MARC21 para Koha
