@@ -1,4 +1,8 @@
 [![DianaLabs - Koha Nuevos](https://img.shields.io/badge/DianaLabs-Koha_Nuevos-8A2BE2?logo=github)](https://github.com/dianahuarazvargas-bit/dianalabs-koha-nuevos)
+
+[![Hecho con Colab](https://img.shields.io/badge/Hecho_con-Google_Colab-F9AB00?logo=googlecolab)](https://colab.research.google.com/)
+[![MARC21](https://img.shields.io/badge/Formato-MARC21-blue)](https://www.loc.gov/marc/)
+[![Koha](https://img.shields.io/badge/Integración-Koha-0066CC?logo=koha)](https://koha-community.org/)
 # 📘 Guía de Usuario: Conversión de Google Sheets a MARC21 para Koha
 
 ## Conversión de Google Sheets → MARC21 para Koha
