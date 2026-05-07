@@ -1,3 +1,126 @@
 # dianalabs
 
-Guía de Usuario: Conversión de Metadatos de Google Sheets a Formato MARC21 para KohaEsta documentación describe el proceso técnico para transformar registros bibliográficos gestionados en hojas de cálculo hacia el formato estándar MARC21, permitiendo la carga masiva de nuevos ejemplares en el sistema Koha.1. Flujo General del ProcesoEl proceso se divide en cuatro etapas críticas:Preparación: Organización de los datos en Excel siguiendo la plantilla institucional.Vinculación: Carga de datos en Google Sheets y obtención del enlace de exportación.Procesamiento: Ejecución del script en Python (Google Colab) para la conversión.Importación: Carga del archivo .mrc resultante en el módulo de catalogación de Koha.2. Preparación del Google SheetsPara que el script funcione correctamente, el archivo de Google Sheets debe cumplir con los siguientes requisitos:Formato de Columnas: Los encabezados deben coincidir exactamente con los nombres esperados por el script (ej. titulo_245, autor_institucion_110, 952_a, etc.).Limpieza de Datos: No deben existir espacios en blanco antes de los nombres de las columnas.Acceso: La hoja de cálculo debe estar configurada como "Cualquier persona con el enlace puede leer" o ser accesible mediante autenticación en el entorno de Colab.3. Descripción del Script de ConversiónEl script desarrollado en Python utiliza la librería pymarc para la construcción de los registros. A continuación, se detallan las funciones de cada sección del código:A. Instalación y ConexiónInstala la dependencia necesaria: !pip install pymarc.Transforma la URL de edición de Google Sheets en una URL de exportación CSV directa para que pandas pueda leer los datos en tiempo real.B. Validación de DatosSe incluye un módulo de validación para las columnas isbn_020, issn_022 y dl_024.El sistema verifica que estos campos contengan únicamente números y guiones, alertando al usuario si encuentra caracteres inválidos antes de generar el archivo final.C. Mapeo de Campos MARC21El script recorre cada fila del Sheets y asigna la información a etiquetas MARC específicas:Etiquetas Principales: 100 (Autor), 245 (Título), 260 (Publicación), 300 (Descripción física).Materias: Mapea múltiples campos de materia (600, 610, 650, 651).Campos de Control Koha (942/952): * Genera la etiqueta 942$c para el tipo de ítem.Crea múltiples etiquetas 952 si existen varios números de copia (numero_copia_952_t), asignando automáticamente la ubicación (952$a y 952$b) y la signatura (952$o).4. Ejecución y DescargaCargar el Notebook: Abrir el archivo Excel_a_Marc_Libros_Nuevos.ipynb en Google Colab.Actualizar URL: Reemplazar la variable google_sheet_url con el nuevo enlace del documento trabajado.Ejecutar Todo: Ir a Entorno de ejecución > Ejecutar todas.Previsualización: El script mostrará los primeros 5 registros en formato mnemotécnico (ej. =245 10$aTítulo...) para verificar la consistencia.Descarga: Automáticamente se generará y descargará el archivo koha_Libros_from_GoogleSheet.mrc.5. Importación en KohaUna vez obtenido el archivo .mrc, el bibliotecólogo debe seguir estos pasos en Koha:Ingresar a Herramientas > Herramientas de sistema > Herramientas de catalogación > Importar registros al depósito.Seleccionar el archivo descargado y procesarlo para su revisión.Verificar que no haya duplicados y completar la importación definitiva al catálogo.Nota Técnica: Este script está diseñado para manejar ejemplares múltiples de forma automatizada. Si una fila tiene datos en numero_copia_952_t.1 y numero_copia_952_t.2, el sistema creará tres ítems vinculados al mismo registro bibliográfico en Koha de forma transparente.
+¡Perfecto! Aquí tienes tu guía de usuario reformateada para que se entienda de manera clara y visual, ideal para tu `README.md` en GitHub. He usado **encabezados, tablas, listas viñeteadas, recuadros de notas y código de ejemplo** para hacerla más amigable.
+
+---
+
+# 📘 Guía de Usuario: Conversión de Google Sheets → MARC21 para Koha
+
+Esta guía explica cómo **transformar registros bibliográficos desde una hoja de cálculo** (Google Sheets) al formato **MARC21**, para poder importarlos masivamente al sistema **Koha**.
+
+---
+
+## 🧭 1. Flujo general del proceso
+
+| Etapa | Acción |
+|-------|--------|
+| 1. Preparación | Organizar los datos en Excel/Google Sheets según la plantilla institucional |
+| 2. Vinculación | Subir los datos a Google Sheets y obtener el enlace de exportación |
+| 3. Procesamiento | Ejecutar un script en **Python (Google Colab)** que convierte los datos |
+| 4. Importación | Cargar el archivo `.mrc` resultante en el módulo de catalogación de Koha |
+
+---
+
+## 📋 2. Preparación del Google Sheets
+
+Para que el script funcione correctamente, tu hoja de cálculo debe cumplir estos **requisitos obligatorios**:
+
+✅ **Encabezados exactos**  
+Deben coincidir con los nombres esperados por el script, por ejemplo:  
+`titulo_245`, `autor_institucion_110`, `952_a`, etc.
+
+✅ **Datos limpios**  
+No debe haber espacios en blanco antes o después de los nombres de las columnas.
+
+✅ **Acceso público o autenticado**  
+La hoja debe estar configurada como:  
+> *“Cualquier persona con el enlace puede leer”*
+
+> 💡 **Nota:** Si usas autenticación en Colab, asegúrate de tener permisos de acceso.
+
+---
+
+## 🐍 3. Descripción del script de conversión
+
+El script está escrito en **Python** y usa la librería `pymarc`. Estas son sus partes principales:
+
+### A. Instalación y conexión
+```python
+!pip install pymarc
+```
+Convierte automáticamente la URL de edición de Google Sheets en una URL de exportación CSV válida para `pandas`.
+
+### B. Validación de datos
+Verifica que los campos `isbn_020`, `issn_022` y `dl_024` contengan **solo números y guiones**.  
+Si encuentra caracteres no válidos, **muestra una alerta** antes de generar el archivo.
+
+### C. Mapeo de campos MARC21
+El script asigna cada columna del Sheets a una etiqueta MARC:
+
+| Etiqueta | Contenido |
+|----------|-----------|
+| 100 | Autor principal |
+| 245 | Título |
+| 260 | Publicación |
+| 300 | Descripción física |
+| 600, 610, 650, 651 | Materias |
+| 942$c | Tipo de ítem (Koha) |
+| 952 | Ejemplares (ubicación, signatura, copia) |
+
+> 🔁 **Ejemplares múltiples:**  
+> Si una fila tiene `numero_copia_952_t.1`, `numero_copia_952_t.2`, etc., el script crea automáticamente **varios ítems 952** vinculados al mismo registro bibliográfico.
+
+---
+
+## ⚙️ 4. Ejecución y descarga del archivo MRC
+
+Sigue estos pasos dentro de **Google Colab**:
+
+1. **Abrir el notebook**  
+   `Excel_a_Marc_Libros_Nuevos.ipynb`
+
+2. **Actualizar la URL**  
+   Reemplaza esta variable con tu enlace de Google Sheets:
+   ```python
+   google_sheet_url = "TU_ENLACE_AQUÍ"
+   ```
+
+3. **Ejecutar todas las celdas**  
+   Ve a: `Entorno de ejecución > Ejecutar todas`
+
+4. **Previsualizar resultados**  
+   El script mostrará los primeros 5 registros en formato mnemotécnico, algo como:
+   ```
+   =245 10$aTítulo del libro...
+   ```
+
+5. **Descargar el archivo**  
+   Se generará automáticamente el archivo:  
+   `koha_Libros_from_GoogleSheet.mrc`
+
+---
+
+## 📥 5. Importación en Koha
+
+Una vez que tengas el archivo `.mrc`, sigue estos pasos dentro de Koha:
+
+1. Ve a:  
+   `Herramientas > Herramientas de sistema > Herramientas de catalogación > Importar registros al depósito`
+
+2. **Selecciona el archivo** `.mrc` que descargaste
+
+3. **Procesa el archivo** para revisión
+
+4. **Verifica que no haya duplicados**  
+   Koha te mostrará coincidencias posibles con registros existentes.
+
+5. **Completa la importación definitiva** al catálogo.
+
+---
+
+## 🧠 Nota técnica importante
+
+> Este script **maneja automáticamente ejemplares múltiples**.  
+> Por ejemplo, si una fila contiene `numero_copia_952_t.1` y `numero_copia_952_t.2`, el sistema creará **tres ítems** (el original + dos copias) vinculados al mismo registro bibliográfico en Koha, sin necesidad de intervención manual.
+
+---
