@@ -19,7 +19,7 @@ Esta guía explica cómo **transformar registros bibliográficos desde una hoja 
 
 ## 📋 2. Preparación del Google Sheets
 
-Para que el script funcione correctamente, tu hoja de cálculo debe cumplir estos **requisitos obligatorios**:
+Para que el script funcione correctamente, la hoja de cálculo debe cumplir estos **requisitos obligatorios**:
 
 ✅ **Encabezados exactos**  
 Deben coincidir con los nombres esperados por el script, por ejemplo:  
@@ -64,7 +64,8 @@ El script asigna cada columna del Sheets a una etiqueta MARC:
 | 952 | Ejemplares (ubicación, signatura, copia) |
 
 > 🔁 **Ejemplares múltiples:**  
-> Si una fila tiene `numero_copia_952_t.1`, `numero_copia_952_t.2`, etc., el script crea automáticamente **varios ítems 952** vinculados al mismo registro bibliográfico.
+> Este script **maneja automáticamente ejemplares múltiples**.  
+> Por ejemplo, si una fila contiene `numero_copia_952_t.1` y `numero_copia_952_t.2`, el sistema creará **tres ítems** (el original + dos copias) vinculados al mismo registro bibliográfico en Koha, sin necesidad de intervención manual.
 
 ---
 
@@ -76,7 +77,7 @@ Sigue estos pasos dentro de **Google Colab**:
    `Excel_a_Marc_Libros_Nuevos.ipynb`
 
 2. **Actualizar la URL**  
-   Reemplaza esta variable con tu enlace de Google Sheets:
+   Reemplaza esta variable con el enlace de Google Sheets:
    ```python
    google_sheet_url = "TU_ENLACE_AQUÍ"
    ```
@@ -111,12 +112,5 @@ Una vez que tengas el archivo `.mrc`, sigue estos pasos dentro de Koha:
    Koha te mostrará coincidencias posibles con registros existentes.
 
 5. **Completa la importación definitiva** al catálogo.
-
----
-
-## 🧠 Nota técnica importante
-
-> Este script **maneja automáticamente ejemplares múltiples**.  
-> Por ejemplo, si una fila contiene `numero_copia_952_t.1` y `numero_copia_952_t.2`, el sistema creará **tres ítems** (el original + dos copias) vinculados al mismo registro bibliográfico en Koha, sin necesidad de intervención manual.
 
 ---
