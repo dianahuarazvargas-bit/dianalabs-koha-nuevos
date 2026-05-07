@@ -104,7 +104,7 @@ Sigue estos pasos dentro de **Google Colab**:
 Una vez que tengas el archivo `.mrc`, sigue estos pasos dentro de Koha:
 
 1. Ve a:  
-   `Herramientas > Herramientas de sistema > Herramientas de catalogación > Importar registros al depósito`
+   `Herramientas > Subir archivos MARC para importación > btn: Seleccionar archivo > btn: Seleccione el archivo a importar > btn: Administrar registros preparados > btn: importar este lote en el catálogo`
 
 2. **Selecciona el archivo** `.mrc` que descargaste
 
